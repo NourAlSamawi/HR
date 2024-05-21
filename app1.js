@@ -1,7 +1,7 @@
-let employeeData = [];
-function generateUniqueEmployeeId() {
+let employeeData = JSON.parse(localStorage.getItem('employees')) || []; 
 
-  return Math.floor(Math.random() * 9000) + 1000;
+function generateUniqueEmployeeId() {
+  return Math.floor(Math.random() * 90) + 100;
 }
 
 function renderEmployeeCard(employee) {
@@ -45,7 +45,12 @@ form.addEventListener('submit', (event) => {
   };
 
   employeeData.push(newEmployee); 
+
+  localStorage.setItem('employees', JSON.stringify(employeeData)); 
+
   renderEmployeeCard(newEmployee); 
 
-  form.reset();
+  form.reset(); 
 });
+
+employeeData.forEach(renderEmployeeCard);
